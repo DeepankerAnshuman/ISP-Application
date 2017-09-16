@@ -1,5 +1,6 @@
 body {
   padding: 50px;
+  background-color: #ECE2E2 !important;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -7,13 +8,23 @@ a {
   color: #00B7FF;
 }
 
+.panel-search-margin{
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
 main{
-  background-color: #F5F5F5;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: white;
   min-height: 500px;
+  z-index: 1000;
 }
 
 .navbar{
-  margin-top: -30px;
+  margin-top: -50px;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
   z-index: 1000;
 }
 
