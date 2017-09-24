@@ -27,6 +27,7 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/knockout/build/output'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/fonts', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/fonts')));
 app.use('/css', express.static(__dirname + '/public/stylesheets/'));
 app.use('/images', express.static(__dirname + '/public/images/'));
 

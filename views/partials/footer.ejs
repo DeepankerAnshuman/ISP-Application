@@ -1,6 +1,57 @@
     <!-- document ready scripts -->
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script> 
+    <script src="/js/knockout-latest.js"></script>
+    <script src="/js/user-scripts.js"></script>
+    
     <script>
         $(function(){
+            AppModule.Init();
+            ko.applyBindings(AppModule.Vm(), $('#SignUpModal')[0]);
+            ko.applyBindings(AppModule.Vm(), $('#loginModal')[0]);
+
+
+            // $('#modalNewUserOk').click(function(){
+            //     var emptyFields = validateEmptyFields($("#SignUpModal"));
+            //     if(emptyFields.length != 0)
+
+            //     var data = {"firstname": $('#First_Name').val(), "lastname": $('#Last_Name').val(),"email": $('#email').val(), "password": $('#pwd').val(), "passwordcnf": $('#pwd1').val()}
+            //     $.ajax({
+            //         type: 'POST',
+            //         url: 'users/AddUser',
+            //         dataType: 'json',
+            //         data: data,
+            //         success: function(result){
+            //             userCreatedSuccess(result);
+            //         },
+            //         error: function(jqXHR, textStatus, err) {
+            //             //show error message
+            //             alert('text status '+textStatus+', err '+err)
+            //         }
+            //     });
+            // });
+
+            // function userCreatedSuccess(result){
+            //     clearModal($("#SignUpModal"));
+            //     $("#SignUpModal").modal('hide');
+            //     $("#putmessage").html('User has been created successfully. Please login using the user name and password.');
+            //     $("#successModal").modal('show');
+            // }
+            
+            // function clearModal(modal){
+            //     modal.find('input').val('');
+            // }
+
+            // function validateEmptyFields(element){
+            //     var emptyFields = [];
+            //     element.find('input').each(function(){
+            //         if($(this).val().trim() == '')
+            //         {
+            //             emptyFields.add($(this));
+            //         }
+            //     });
+            //     return emptyFields;
+            // }
         });
     </script>
 </body>

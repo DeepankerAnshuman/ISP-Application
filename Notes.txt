@@ -1,0 +1,5 @@
+>>static url
+>>pin code based location search
+>>data with review: do you recommend, current brodband plan upload and download speed, is the isp you are revuewing your current isp.
+>>chalk for logging
+>>bcrypt for password hashing

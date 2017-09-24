@@ -2,33 +2,108 @@ body {
   padding: 50px;
   background-color: #ECE2E2 !important;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  white-space: nowrap;
+  /* background-image: url("/images/Background11111.jpg"); */
 }
 
 a {
   color: #00B7FF;
 }
 
-.panel-search-margin{
-  margin-left: 200px;
-  margin-right: 200px;
+strong{
+  color: black !important;
 }
+
+.panel:hover{
+  box-shadow: 10px white !important;
+}
+/*location Dropdown */
+#mainselection {
+  background: url("arrow.gif") no-repeat;
+}
+
 
 main{
   padding: 10px;
   border-radius: 4px;
-  background-color: white;
   min-height: 500px;
   z-index: 1000;
 }
 
+.backgroud-transparent{
+  background-color: transparent;
+}
+
 .navbar{
-  margin-top: -50px;
-  border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+  margin-top: -40px;
+  /* border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important; */
   z-index: 1000;
 }
 
 .right-align{
   text-align: right;
   margin-top: -40px;
+}
+
+/*Seach box styles*/
+.search-box-input {
+  margin-left: -15px;
+  width: 500px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('http://i47.tinypic.com/r02vbq.png');
+  background-position: -13px -12px; 
+  background-repeat: no-repeat;
+  padding: 9.5px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+.search-box-input:focus {
+  width: 88%;
+}
+
+/* Review Display Widget*/
+.review-display-widget{
+  background: #afc1dd;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 4px;
+  transition-duration: all .4s ease;
+}
+.review-display-widget:hover{
+  box-shadow: 0px 0px 5px 0px #8e9baf; 
+  background: #a9bbd8;
+  padding: 18px;
+}
+
+.review-display-reviewer{
+  color: green;
+  display: inline-block;
+  width: 35%;
+  white-space: nowrap;
+}
+
+.review-display-review{
+  color: green;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+/*Modal styles*/
+.modal-header {
+  color: #fff;
+  background-color: #337ab7;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+   border-top-left-radius: 5px;
+   border-top-right-radius: 5px;
 }
