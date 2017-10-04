@@ -1,11 +1,4 @@
-var db = require('../databaselayer/user_database.js');
-
-var user = {
-    firstname:"",
-    lastname: "",
-    email: "",
-    password: ""
-}
+var db = require('../databaselayer/database.js');
 
 exports.AddUser = function(data, callback){
     

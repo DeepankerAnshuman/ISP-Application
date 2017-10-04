@@ -32,6 +32,7 @@ app.use('/css', express.static(__dirname + '/public/stylesheets/'));
 app.use('/images', express.static(__dirname + '/public/images/'));
 
 app.use('/', index);
+app.use('/index', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

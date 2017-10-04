@@ -4,11 +4,16 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   white-space: nowrap;
-  /* background-image: url("/images/Background11111.jpg"); */
+  /* background-image: url("/images/image1.jpg"); */
 }
 
 a {
   color: #00B7FF;
+}
+
+input[type=radio]{
+  height: 15px;
+  width: 15px;
 }
 
 strong{

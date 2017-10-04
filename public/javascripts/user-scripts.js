@@ -58,16 +58,48 @@ var viewModels = viewModels || {};
                     dataType: 'json',
                     data: data,
                     success: function(result){
-                        userCreated(true);
+                        self.userCreated(true);
                     },
                     error: function(jqXHR, textStatus, err) {
                         //show error message
-                        userCreated(false);
+                        self.userCreated(false);
                     }
                 });
             }
             
         };
+    }
+
+    models.ReviewViewModel = function(){
+        var self = this;
+
+        self.ServiceProvider = ko.observable();
+        self.City = ko.observable();
+        self.Area = ko.observable();
+        self.Rating = ko.observable(0);
+        self.IsRecommended = ko.observable(true);
+        self.IsCurrent = ko.observable(true);
+        self.AvgUploadSpeed = ko.observable(0);
+        self.AvgDownloadSpeed = ko.observable(0);
+        self.Email = ko.observable();
+        self.Description = ko.observable();
+
+        self.SaveReview = function(){
+            var data = ko.toJSON(self);
+            $.ajax({
+                type: 'POST',
+                url: 'index/createReview',
+                dataType: 'json',
+                data: {"data": data},
+                success: function(result){
+                    alert('result');
+                },
+                error: function(jqXHR, textStatus, err) {
+                    //show error message
+                    alert('user could not be created');
+                }
+            });
+        }
     }
     
 })(viewModels);
@@ -76,14 +108,20 @@ var viewModels = viewModels || {};
 var AppModule = AppModule || {};
 
 (function(module){
-    var _vm = {};
+    var _vmUser = {};
+    var _vmReview = {};
 
     module.Init = function(){
-        _vm = new viewModels.UserViewMOdel();
+        _vmUser = new viewModels.UserViewMOdel();
+        _vmReview = new viewModels.ReviewViewModel();
     }
 
     module.Vm = function(){
-        return _vm;
+        return _vmUser;
+    }
+
+    module.VmReview = function(){
+        return _vmReview;
     }
 
     // module.BindData = function(data){

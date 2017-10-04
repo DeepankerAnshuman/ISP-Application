@@ -6,8 +6,10 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "automapper-ts": "^1.8.3",
     "body-parser": "~1.17.1",
     "bootstrap": "^3.3.7",
+    "chalk": "^2.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "ejs": "~2.5.6",
@@ -18,6 +20,7 @@
     "jquery": "^3.2.1",
     "knockout": "^3.4.2",
     "mongodb": "^2.2.31",
+    "mongoose": "^4.11.13",
     "morgan": "~1.8.1",
     "serve-favicon": "~2.4.2"
   }

@@ -16,8 +16,73 @@
                 <button class="btn btn-primary btn-lg">Search</button>
             </div>
             <div class="col-sm-2" style="text-align: right;">
-                <button class="btn btn-primary btn-lg">Write Review</button>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addReviewModal">Write Review</button>
             </div>
         </div>
     </div>
+</div>
+
+<div id="addReviewModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Write a Review</h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+              <label for="r-title">Service Provider Name:</label>
+              <input type="text" class="form-control" id="r-title" data-bind="value : ServiceProvider">
+          </div>
+          <div>
+            <div class="form-group" style="display: inline-block; width: 33%;">
+                <label for="r-city">City:</label>
+                <input type="text" class="form-control" id="r-city" data-bind="value : City">
+            </div>
+            <div class="form-group" style="display: inline-block; width: 33%;">
+                <label for="r-area">Area:</label>
+                <input type="text" class="form-control" id="r-area" data-bind="value : Area">
+            </div>
+            <div class="form-group" style="display: inline-block; width: 32.5%;">
+              <label for="r-rating">Rating:</label>
+              <input type="number" class="form-control" id="r-rating" min="1" max="5" data-bind="value : Rating" />
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="">If I recommend this service provider:</label>
+              <input type="radio" name="recommend" value=true data-bind="value : IsRecommended"/>
+              <label for="yes">Yes</label>
+              <input type="radio" name="recommend" value=false data-bind="value : IsRecommended"/>
+              <label for="no">No</label>
+          </div>
+          <div class="form-group">
+              <label for="">If this is my current service provider:</label>
+              <input type="radio" name="current" value=true data-bind="value : IsCurrent"/>
+              <label for="yes">Yes</label>
+              <input type="radio" name="current" value=false data-bind="value : IsCurrent"/>
+              <label for="no">No</label>
+          </div>
+          <div>
+            <div class="form-group" style="display: inline-block; width: 50%;">
+                <label for="r-upload">Average Upload Speed:</label>
+                <input type="number" class="form-control" id="r-upload" data-bind="value : AvgUploadSpeed" />
+            </div>
+            <div class="form-group" style="display: inline-block; width: 49.8%;">
+                <label for="r-download">Average download Speed:</label>
+                <input type="number" class="form-control" id="r-download" data-bind="value : AvgDownloadSpeed">
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="r-mail">Email:</label>
+              <input type="email" class="form-control" id="r-mail" data-bind="value : Email">
+          </div>
+          <div class="form-group">
+              <label for="pwd">Review Description:</label>
+              <textarea rows="4" class="form-control" data-bind="value : Description"></textarea>
+          </div>
+          <button class="btn btn-primary" data-bind="click : SaveReview">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>
