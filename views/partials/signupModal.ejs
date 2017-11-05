@@ -1,0 +1,53 @@
+<div id="SignUpModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" data-bind="visible: !IsValid() || !IsPasswordMatching()">
+                    <span data-bind="visible: !IsValid()">
+                        <strong>Note: All fields are mandatory.</strong>
+                    </span>
+                    <br/>
+                    <span data-bind="visible: !IsPasswordMatching()" style="color: red;">
+                        error*: Password not matching.
+                    </span>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="First_Name">First Name:</label>
+                        <input type="text" class="form-control" id="First_Name" data-bind="value: FirstName">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Last_Name">Last Name:</label>
+                        <input type="text" class="form-control" id="Last_Name" data-bind="value: LastName">
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email" data-bind="value: Email">
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="pwd" data-bind="value: Password, valueUpdate: 'afterkeydown'">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="pwd">Confirm Password:</label>
+                        <input type="password" class="form-control" id="pwd1" data-bind="value: PasswordConfirm, valueUpdate: 'afterkeydown'">
+                    </div>
+                </div>
+                <br/>
+                <button type="button" id="modalNewUserOk" class="btn btn-primary" data-bind="click: CreateNewUser, enable: IsValid() && IsPasswordMatching()">Sign Up</button>
+            </div>
+          </div>
+        </div>
+    </div>

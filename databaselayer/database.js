@@ -18,21 +18,23 @@ mongoose.connection.on('disconnected', function () {
   console.log('Mongoose disconnected');
 });
 
+var reMatch = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 //review schema
 var reviewSchema = new mongoose.Schema({
-  Author:String,
-  ServiceProvider: String,
-  City: String,
-  Area: String,
-  Rating: Number,
+  Author:{type: String, required: true},
+  ServiceProvider: {type: String, required: true},
+  City: {type: String, required: true},
+  Area: {type: String, required: true},
+  Rating: {type: Number, min: 1, max: 5},
   IsRecommended: Boolean,
   IsCurrent: Boolean,
-  AvgUploadSpeed: Number,
-  AvgDownloadSpeed: Number,
-  Email: String,
-  CreatedAt:{type:Date,default:Date.now},
-  Description:String,
-  Comments:[{body:String,commented_by:String,date:Date}],
+  AvgUploadSpeed: {type: Number, min: 0},
+  AvgDownloadSpeed: {type: Number, min: 0},
+  Email: {type: String, required: true, match: reMatch},
+  CreatedAt:{type: Date,default: Date.now},
+  Description:{type: String, required: true},
+  Comments:[{body: String, commented_by: String,date:Date}],
 });
 
 //review model
@@ -43,12 +45,13 @@ exports.AddUser = function(user, callback){
     mongoClient.connect(connectionString, function(err, db){
         var collection= db.collection('ispappusers');
         try{
-            collection.insertOne(user, function(err, result){
-                db.close();
+            collection.insertOne(user, function(err, result){                
                 callback(err, result);
             });
         }catch(e){
             console.log(e);
+        }finally{
+            db.close();
         }
     });
 }

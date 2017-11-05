@@ -3,56 +3,18 @@
     <script src="/js/bootstrap.min.js"></script> 
     <script src="/js/knockout-latest.js"></script>
     <script src="/js/user-scripts.js"></script>
+    <script src="/js/rating.js"></script>
     
-    <script>
+    <script type="text/javascript">
         $(function(){
-            AppModule.Init();
-            ko.applyBindings(AppModule.Vm(), $('#SignUpModal')[0]);
-            ko.applyBindings(AppModule.Vm(), $('#loginModal')[0]);
-            ko.applyBindings(AppModule.VmReview(), $('#addReviewModal')[0]);
-
-
-            // $('#modalNewUserOk').click(function(){
-            //     var emptyFields = validateEmptyFields($("#SignUpModal"));
-            //     if(emptyFields.length != 0)
-
-            //     var data = {"firstname": $('#First_Name').val(), "lastname": $('#Last_Name').val(),"email": $('#email').val(), "password": $('#pwd').val(), "passwordcnf": $('#pwd1').val()}
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: 'users/AddUser',
-            //         dataType: 'json',
-            //         data: data,
-            //         success: function(result){
-            //             userCreatedSuccess(result);
-            //         },
-            //         error: function(jqXHR, textStatus, err) {
-            //             //show error message
-            //             alert('text status '+textStatus+', err '+err)
-            //         }
-            //     });
-            // });
-
-            // function userCreatedSuccess(result){
-            //     clearModal($("#SignUpModal"));
-            //     $("#SignUpModal").modal('hide');
-            //     $("#putmessage").html('User has been created successfully. Please login using the user name and password.');
-            //     $("#successModal").modal('show');
-            // }
-            
-            // function clearModal(modal){
-            //     modal.find('input').val('');
-            // }
-
-            // function validateEmptyFields(element){
-            //     var emptyFields = [];
-            //     element.find('input').each(function(){
-            //         if($(this).val().trim() == '')
-            //         {
-            //             emptyFields.add($(this));
-            //         }
-            //     });
-            //     return emptyFields;
-            // }
+            var rating = new Rating({
+                field: $('.rating-container'),
+                defaultRating: 3,
+                onSelect: function(rating) {
+                    alert(rating);
+                }
+            });            
+            AppModule.Init();            
         });
     </script>
 </body>

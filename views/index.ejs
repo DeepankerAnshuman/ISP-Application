@@ -1,43 +1,44 @@
 
 <%- include partials/header.ejs %>
 <%- include partials/search.ejs %>
-    <main class="backgroud-transparent">
+
+<br/>
+    <main id="main" class="backgroud-transparent">
         <div class="row">
             <div class="col-sm-8">
                 <div class="panel panel-primary backgroud-transparent">
                     <div class="panel-heading">Recent Reviews</div>
                     <div class="panel-body">
-                        <div class="review-display-widget row">
-                            <div class="col-sm-10">
+                        <!-- ko foreach: TopfiveReviews -->
+                        <div class="row review-display-widget">
+                            <div class="col-sm-1">
+                                    <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
+                            </div>
+                            <div class="col-sm-9">
                                 <div>
                                     <div class="review-display-reviewer">
                                         <strong>By:</strong> 
-                                        <span>Anshuman Shukla</span>
+                                        <span data-bind="text: Author"></span>
                                     </div>
                                     <div class="review-display-reviewer">
                                         <strong>For:</strong> 
-                                        <span>Airtel Broadband</span>
+                                        <span data-bind="text: ServiceProvider"></span>
                                     </div>
                                     <div class="review-display-reviewer">
                                         <strong>On:</strong> 
-                                        <span>13/Dec/2016</span>
+                                        <span data-bind="text: CreatedAtFormatted"></span>
                                     </div>    
                                 </div>
                                 <div class="review-display-review">
                                     <strong>Review:</strong> 
-                                    <span>Pathetic service. Service at times.</span>
+                                    <span data-bind="text: Description"></span>
                                 </div>
                             </div>
                             <div class="col-sm-2" style="margin-top: 6px; padding-left:43px;">
-                                <button class="btn btn-primary btn-sm">Read Full</button>
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview">Read Full</button>
                             </div>
                         </div>
-                        
-                        
-                        <div class="review-display-widget">Review2</div>
-                        <div class="review-display-widget">Review3</div>
-                        <div class="review-display-widget">Review4</div>
-                        <div class="review-display-widget">Review5</div>
+                        <!-- /ko -->                       
                     </div>
                 </div>
             </div>
@@ -45,14 +46,30 @@
                 <div class="panel panel-primary backgroud-transparent">
                     <div class="panel-heading">Top rated ISPs</div>
                     <div class="panel-body">
-                        <div class="review-display-widget">Service provider 1</div>
-                        <div class="review-display-widget">Service provider 2</div>
-                        <div class="review-display-widget">Service provider 3</div>
-                        <div class="review-display-widget">Service provider 4</div>
-                        <div class="review-display-widget">Service provider 5</div>
+                        <!-- ko foreach: TopFiveIsp -->
+                        <div class="review-display-widget">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
+                                </div>
+                                <div class="col-sm-9" style="margin-top: .2em;">
+                                    <strong><span data-bind="text: isp" style="font-size: 1.1em;"></span></strong>
+                                </div>
+                                <div class="col-sm-9" style="text-align: right">
+                                    <div style="float-left">
+                                            <%- include partials/starRatings.ejs %>
+                                    </div>
+                                    <span data-bind="text: avgRating"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->                        
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="viewReviewModal" class="modal fade" role="dialog">
+            <%- include partials/viewReviewModal.ejs %>
         </div>
     </main>
 <%- include partials/footer.ejs %>

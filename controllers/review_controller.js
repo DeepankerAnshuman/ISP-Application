@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var mapper = require('automapper-ts').automapper;
 var db = require('../databaselayer/database.js');
 
 exports.createReview = function(data, callback){
@@ -24,7 +23,16 @@ exports.createReview = function(data, callback){
         if(err) console.log(err);
 
         callback(err);
-    })
-    
+    })    
     //review.author = data.Author;
+}
+
+exports.getReviews = function(callback){
+    db.Review.find({}, function(err, reviews){
+        if(err){
+          console.log(err);
+        } else{
+            callback(reviews);
+        }
+    })
 }

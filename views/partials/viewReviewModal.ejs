@@ -1,0 +1,78 @@
+<div class="modal-dialog">
+        <div class="modal-content" data-bind="with: ReviewToView">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Review Details - By: <span class="well well-sm" data-bind="text: Author" style="color: black"></span></h4>
+            </div>
+            <div class="modal-body">
+                <!-- <div class="row">
+                    <span data-bind="text: $parent.City"></span>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Service Provider:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: ServiceProvider"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Rating:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: Rating"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>City:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: City"></span>
+                        </div>    
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Area:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: Area"></span>
+                        </div>    
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>I recommend this service:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: IsRecommended() ? 'Yes':'No'"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>This is my current service provider:</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: IsCurrent()? 'Yes':'No'"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Average Upload Speed(in Mbps):</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: AvgUploadSpeed"></span>
+                        </div>    
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Average Download Speed(in Mbps):</label><br />
+                        <div class="well well-sm">
+                            <span data-bind="text: AvgDownloadSpeed"></span>
+                        </div>    
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Review Description:</label><br />
+                        <div class="well well-lg">
+                            <span data-bind="text: Description"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
