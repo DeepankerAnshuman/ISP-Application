@@ -141,6 +141,7 @@ var viewModels = viewModels || {};
 
     models.ReviewViewModel = function(data){
         var self = this;
+        self.Id = ko.observable(data ? data._id : undefined);
         self.Author = ko.observable(data ? data.Author : undefined);
         self.ServiceProvider = ko.observable(data ? data.ServiceProvider : undefined);
         self.City = ko.observable(data ? data.City : undefined);
@@ -154,17 +155,22 @@ var viewModels = viewModels || {};
         self.Description = ko.observable(data ? data.Description : undefined);
         self.CreatedAt = ko.observable(data ? new Date(data.CreatedAt) : undefined);
 
-        self.ComputedRating = ko.computed(function(){
-            var ratingNow = self.Rating();
-            var rating = new Rating({
-                field: $('.rating-container-create'),
-                defaultRating: ratingNow,
-                onSelect: function(rating) {
-                    alert(rating);
-                }
-            });
-            return rating;
+        self.ClassForRatingStars = ko.computed(function(){
+            return 'star-rating-'+self.Id();
         });
+
+        // self.RatingStars = ko.computed(function(){
+        //     var ratingNow = self.Rating();
+        //     var id = self.Email();
+        //     var cssClass = self.ClassForRatingStars();
+        //     var rating = new Rating({
+        //         _id: id,
+        //         readOnly: true,
+        //         field: $('.'+cssClass),
+        //         defaultRating: ratingNow
+        //     });
+        //     return rating;
+        // });
         
         self.CreatedAtFormatted = ko.computed(function(){
             if(self.CreatedAt())

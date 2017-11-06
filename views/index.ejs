@@ -10,7 +10,38 @@
                     <div class="panel-heading">Recent Reviews</div>
                     <div class="panel-body">
                         <!-- ko foreach: TopfiveReviews -->
-                        <div class="row review-display-widget">
+                        <div class="review-display-widget">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <span data-bind="text: ServiceProvider" style="font-size:1.4em; color:brown; font-weight:bold;"></span>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <!-- <div data-bind="css: ClassForRatingStars">
+
+                                            </div> -->
+                                            <%- include partials/starRatings.ejs %>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <span data-bind="text: Description"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-9">
+                                    <span data-bind="text: Description"></span>
+                                </div> -->
+                                <div class="col-sm-2">
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview">Read Full</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row review-display-widget">
                             <div class="col-sm-1">
                                     <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
                             </div>
@@ -37,7 +68,7 @@
                             <div class="col-sm-2" style="margin-top: 6px; padding-left:43px;">
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview">Read Full</button>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /ko -->                       
                     </div>
                 </div>
