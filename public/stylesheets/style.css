@@ -1,10 +1,25 @@
 body {
-  padding: 50px;
   /* background-color: #222 !important; */
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   white-space: nowrap;
+  outline: none;
   /* background-image: url("/images/image1.jpg"); */
+}
+
+.search-conatainer{
+  position: fixed;
+  top: 51px;
+  left: 0px;
+  right: 0px;
+}
+
+.z-index {
+  z-index: 100;
+}
+
+.z-index-navbar {
+  z-index: 200;
 }
 
 img {
@@ -20,25 +35,27 @@ img {
 .btn-primary{
   background: #ff5a5f !important;
   border: 1px solid #ff5a5f !important;
+  outline: none;
 }
 
 input[type="text"], input[type="password"], input[type="number"], input[type="email"]{
   border-top: 0px;
   border-left: 0px;
   border-right: 0px;
-
+  outline: none;
+  box-shadow: 0px;
 }
 
-#searchDiv{
-  /* background-image: url("/images/image1.jpg"); */
+/* #searchDiv{
+  background-image: url("/images/image1.jpg"); */
   /* background: -moz-linear-gradient(270deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); ff3.6+ */
   /* background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(107,107,107,1)), color-stop(5%, rgba(107,107,107,1)), color-stop(70%, rgba(0,0,0,1))); safari4+,chrome */
   /* background: -webkit-linear-gradient(270deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); safari5.1+,chrome10+ */
   /* background: -o-linear-gradient(270deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); opera 11.10+ */
   /* background: -ms-linear-gradient(270deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); ie10+ */
   /* background: linear-gradient(180deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); w3c */
-  /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6B6B6B', endColorstr='#000000',GradientType=0 ); ie6-9 */
-}
+  /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6B6B6B', endColorstr='#000000',GradientType=0 ); ie6-9
+} */
 
 a {
   color: #00B7FF;
@@ -49,19 +66,15 @@ input[type=radio]{
   width: 15px;
 }
 
-main{
+main {
+  margin-top: 110px;
   padding: 10px;
   border-radius: 4px;
   min-height: 500px;
-  z-index: 1000;
 }
 
 strong{
   color: black !important;
-}
-
-.glyphicon-star{
-  color: olivedrab;
 }
 
 .error-message{
@@ -71,23 +84,27 @@ strong{
 .panel:hover{
   box-shadow: 10px white !important;
 }
+
 /*location Dropdown */
 #mainselection {
   background: url("arrow.gif") no-repeat;
 }
 
-
-
-
-.backgroud-transparent{
+/* .backgroud-transparent{
   background-color: transparent;
-}
+} */
 
 .navbar{
-  margin-top: -40px;
-  /* border-top-left-radius: 0px !important;
-  border-top-right-radius: 0px !important; */
-  z-index: 1000;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top:0px;
+  margin-bottom: 50px;
+  border-radius: 0px !important;
+}
+
+.navbar-inverse{
+  background-color: #001036;
 }
 
 .right-align{
@@ -101,7 +118,6 @@ strong{
   width: 500px;
   box-sizing: border-box;
   border: 2px solid #ccc;
-  border-radius: 4px;
   font-size: 16px;
   background-color: white;
   background-image: url('http://i47.tinypic.com/r02vbq.png');
@@ -118,14 +134,12 @@ strong{
 
 /* Review Display Widget*/
 .review-display-widget{
-  background: #FFE9DD;
-  /* padding: 15px;
-  transition-duration: all 1s ease;
-  color: #660000; */
+  background: #FFE9DD;  
   margin: 5px;
   border-radius: 4px;
-  padding: 10px;
+  padding: 5px;
 }
+
 .review-display-widget:hover{
   box-shadow: 0px 0px 5px 0px #8e9baf; 
   /* background: #a9bbd8; */
@@ -161,65 +175,108 @@ strong{
 }
 
 
+/*Rating widget styles*/
 
-
-
-
-
-
-
-.rating {
-  float:left;
-}
-
-/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
- follow these rules. Every browser that supports :checked also supports :not(), so
- it doesn’t make the test unnecessarily selective */
-.rating:not(:checked) > input {
-  position:absolute;
-  top:-9999px;
-  clip:rect(0,0,0,0);
-}
-
-.rating:not(:checked) > label {
-  float:right;
-  width:1em;
-  padding:0 .1em;
-  overflow:hidden;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:200%;
-  line-height:1.2;
-  color:#ddd;
-  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
-}
-
-.rating:not(:checked) > label:before {
-  content: '★ ';
-}
-
-.rating > input:checked ~ label {
-  color: #f70;
-  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
-}
-
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: gold;
-  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked + label:hover ~ label,
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
-  color: #ea0;
-  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
-}
-
-.rating > label:active {
-  position:relative;
+.rating-up {
   top:2px;
-  left:2px;
+  padding-top: 7px; 
+  padding-bottom: 7px;
+  padding-left: 2px;
+  padding-right: 1px; 
+  color: #fffcf8; 
+  background: #ff5a5f;
+  font-size: 1em;
+  cursor: pointer;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.rating-down{
+  top: 3px;
+  padding-top: 8px; 
+  padding-bottom:6px;
+  padding-left: 2px;
+  padding-right: 1px; 
+  color: #fffcf8; 
+  background: #ff5a5f;
+  font-size: 1em;
+  cursor: pointer;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rating-up:active{
+  background: #e9444a;
+  padding-top: 6.5px; 
+  padding-bottom: 6.5px;
+  padding-left: 2px;
+  padding-right: 0.5px;
+  font-weight: bolder; 
+}
+.rating-down:active{
+  background: #e9444a;
+  padding-top: 6.5px; 
+  padding-bottom: 5.5px;
+  padding-left: 1.5px;
+  padding-right: 1.5px;
+  font-weight: bolder; 
+}
+
+.rating-up:hover{
+  background: #e9444a;
+}
+.rating-down:hover{
+  background: #e9444a;
+}
+
+.rating-block {
+  display: inline-block; 
+  padding: 6px; 
+  font-size: 1.2em; 
+  text-align: center; 
+  background: #337ab7; 
+  color:#fffcf8;
+  margin-left: -4px;
+  margin-right: -4.1px;
+  border-radius: 2px;
+}
+
+.star-color{
+  color:#fffcf8;
+}
+
+
+
+/*Radio Button styles*/
+.radio-div * {
+  cursor: pointer;
+  margin-top: 0.4em;
+}
+
+input[type="radio"]{
+  display: none;  
+}
+
+.radio-no{
+  margin-left: -4.2px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid grey;
+  border-left: 0px;
+  color: black;
+  padding: 4px;
+}
+
+.radio-yes{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid grey;
+  border-right: 0px;
+  color: black;
+  padding: 4px;
+}
+
+.radio-selected{
+  background: #337ab7 !important;
+  color: white !important ;
 }

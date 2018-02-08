@@ -1,0 +1,93 @@
+
+<div id="addReviewModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Write a Review</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group" data-bind="visible: !IsValid()">
+                <span class="error-message">Note: Please fill all mendatory fields before submitting your review.</span>
+            </div>
+            <div id="validation-error" style="visibility: hidden">
+              <span class="error-message" id="validation-error-span"></span>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                      <label for="r-title">Service Provider Name:</label>
+                      <input type="text" class="form-control" id="r-title" data-bind="value : ServiceProvider, valueUpdate: 'afterkeydown'" placeholder="Enter the name of the service provider"/>
+                </div>
+                <div class="col-sm-6">
+                      <label for="r-rating">Rating:</label>
+                      <div>
+                          <%- include ./starRatings %>
+                      </div>    
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-6">
+                  <label for="r-city">City:</label>
+                  <input type="text" class="form-control" id="r-city" data-bind="value : City" placeholder="Enter name of your city">
+              </div>
+              <div class="col-sm-6">
+                  <label for="r-area">Area:</label>
+                  <input type="text" class="form-control" id="r-area" data-bind="value : Area" placeholder="Enter name of your area">
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="">If I recommend this service provider:</label><br/>
+                <div class="radio-div">
+                    <input type="radio" id="radio-r" name="recommended" value='true' data-bind="checked: IsRecommended" />
+                    <label for="radio-r" class="radio-yes" data-bind="css : {'radio-selected' : IsRecommended() == 'true', '': IsRecommended() == 'false'}">Yes</label>
+                    <input type="radio" id="radio-nr" name="recommended" value='false' data-bind="checked: IsRecommended"/>
+                    <label for="radio-nr" class="radio-no" data-bind="css : {'radio-selected' : IsRecommended() == 'false', '': IsRecommended() == 'true'}">No</label>
+                </div>                  
+              </div>
+              <div class="col-sm-6">
+                <label for="">If this is my current service provider:</label><br/>
+                <div class="radio-div">
+                    <input type="radio" id="radio-c" name="current" value='true' data-bind="checked : IsCurrent" />
+                    <label for="radio-c" class="radio-yes" data-bind="css : {'radio-selected' : IsCurrent() == 'true', '': IsCurrent() == 'false'}">Yes</label>
+                    <input type="radio" id="radio-nc" name="current" value='false' data-bind="checked : IsCurrent"/>
+                    <label for="radio-nc" class="radio-no" data-bind="css : {'radio-selected' : IsCurrent() == 'false', '': IsCurrent() == 'true'}">No</label>
+                </div>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-6">
+                  <label for="r-upload">Average Upload Speed:</label>
+                  <input type="number" class="form-control" id="r-upload" min="0" data-bind="value : AvgUploadSpeed" placeholder="Upload speed of your internet service"/>
+              </div>
+              <div class="col-sm-6">
+                  <label for="r-download">Average download Speed:</label>
+                  <input type="number" class="form-control" id="r-download" min="0" data-bind="value : AvgDownloadSpeed" placeholder="Download speed of your internet service">
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-8">
+                  <label for="r-mail">Email:</label>
+                  <input type="email" class="form-control" id="r-mail" data-bind="value : Email" placeholder="Your e-mail address">
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-sm-12">
+                  <label>Review Description:</label>
+                  <textarea rows="3" class="form-control" data-bind="value : Description" placeholder="Write your review"></textarea>
+                </div>
+            </div>
+            <br/>
+            <button class="btn btn-primary" data-bind="click : SaveReview, enable: IsValid()">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

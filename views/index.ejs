@@ -1,9 +1,11 @@
-
-<%- include partials/header.ejs %>
-<%- include partials/search.ejs %>
-
-<br/>
-    <main id="main" class="backgroud-transparent">
+<div class="z-index-navbar">
+    <%- include partials/header.ejs %>
+</div>
+<main id="main" >
+    <div class="search-conatainer z-index">
+        <%- include partials/search.ejs %>    
+    </div>
+    <br/>
         <div class="row">
             <div class="col-sm-8">
                 <div class="panel panel-primary backgroud-transparent">
@@ -17,14 +19,13 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="row">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-6">
                                             <span data-bind="text: ServiceProvider" style="font-size:1.4em; color:brown; font-weight:bold;"></span>
                                         </div>
-                                        <div class="col-sm-9">
-                                            <!-- <div data-bind="css: ClassForRatingStars">
-
-                                            </div> -->
-                                            <%- include partials/starRatings.ejs %>
+                                        <div class="col-sm-6">
+                                            <div>
+                                                <%- include partials/starRatings %>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -33,42 +34,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-sm-9">
-                                    <span data-bind="text: Description"></span>
-                                </div> -->
+                                
                                 <div class="col-sm-2">
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview">Read Full</button>
+                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview" style="margin-top: 2px; align: right;">Read Full</button>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="row review-display-widget">
-                            <div class="col-sm-1">
-                                    <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
-                            </div>
-                            <div class="col-sm-9">
-                                <div>
-                                    <div class="review-display-reviewer">
-                                        <strong>By:</strong> 
-                                        <span data-bind="text: Author"></span>
-                                    </div>
-                                    <div class="review-display-reviewer">
-                                        <strong>For:</strong> 
-                                        <span data-bind="text: ServiceProvider"></span>
-                                    </div>
-                                    <div class="review-display-reviewer">
-                                        <strong>On:</strong> 
-                                        <span data-bind="text: CreatedAtFormatted"></span>
-                                    </div>    
-                                </div>
-                                <div class="review-display-review">
-                                    <strong>Review:</strong> 
-                                    <span data-bind="text: Description"></span>
-                                </div>
-                            </div>
-                            <div class="col-sm-2" style="margin-top: 6px; padding-left:43px;">
-                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview">Read Full</button>
-                            </div>
-                        </div> -->
                         <!-- /ko -->                       
                     </div>
                 </div>
@@ -83,14 +54,18 @@
                                 <div class="col-sm-3">
                                     <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
                                 </div>
-                                <div class="col-sm-9" style="margin-top: .2em;">
+                                <div class="col-sm-9">
                                     <strong><span data-bind="text: isp" style="font-size: 1.1em;"></span></strong>
                                 </div>
-                                <div class="col-sm-9" style="text-align: right">
-                                    <div style="float-left">
-                                            <%- include partials/starRatings.ejs %>
+                                <div class="col-sm-9" style="text-align: left">
+                                    <div>
+                                        <div style="display: inline;">
+                                            <span class="rating-block">
+                                                <span data-bind="text: avgRating"></span>
+                                                <span class="glyphicon glyphicon-star star-color"></span>
+                                            </span>
+                                        </div>
                                     </div>
-                                    <span data-bind="text: avgRating"></span>
                                 </div>
                             </div>
                         </div>

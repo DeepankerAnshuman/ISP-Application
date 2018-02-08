@@ -1,8 +1,13 @@
 var viewModels = viewModels || {};
 
+var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
+
 (function(models){
     models.MainViewModel = function(){
         var self = this;
+
+        self.AvailableCities = ko.observableArray(cities);
+        self.SelectedCity = ko.observable();
 
         self.Reviews = ko.observableArray([]);
         self.ReviewToView = ko.observable();
@@ -58,10 +63,10 @@ var viewModels = viewModels || {};
                 // Math.round(ratingSum/ratingCount);
                 distinctISPWithAvgRating.push({isp: item.isp, avgRating: averageRating});
             });
-            var sortedIsp = distinctISPWithAvgRating.sort(function(left, right){
+            distinctISPWithAvgRating.sort(function(left, right){
                 return right.avgRating - left.avgRating;
             })
-            return sortedIsp.slice(0,5);
+            return distinctISPWithAvgRating.slice(0,5);
         });
 
         //Functions
@@ -147,30 +152,14 @@ var viewModels = viewModels || {};
         self.City = ko.observable(data ? data.City : undefined);
         self.Area = ko.observable(data ? data.Area : undefined);
         self.Rating = ko.observable(data ? data.Rating: 1);
-        self.IsRecommended = ko.observable(data ? data.IsRecommended : true);
-        self.IsCurrent = ko.observable(data ? data.IsCurrent : true);
+        self.IsRecommended = ko.observable(data ? data.IsRecommended ? 'true' : 'false' : 'true');
+        self.IsCurrent = ko.observable(data ? data.IsCurrent ? 'true' : 'false' : 'true');
         self.AvgUploadSpeed = ko.observable(data ? data.AvgUploadSpeed: 1);
         self.AvgDownloadSpeed = ko.observable(data ? data.AvgDownloadSpeed : 1);
         self.Email = ko.observable(data ? data.Email : undefined);
         self.Description = ko.observable(data ? data.Description : undefined);
         self.CreatedAt = ko.observable(data ? new Date(data.CreatedAt) : undefined);
-
-        self.ClassForRatingStars = ko.computed(function(){
-            return 'star-rating-'+self.Id();
-        });
-
-        // self.RatingStars = ko.computed(function(){
-        //     var ratingNow = self.Rating();
-        //     var id = self.Email();
-        //     var cssClass = self.ClassForRatingStars();
-        //     var rating = new Rating({
-        //         _id: id,
-        //         readOnly: true,
-        //         field: $('.'+cssClass),
-        //         defaultRating: ratingNow
-        //     });
-        //     return rating;
-        // });
+        self.IsInCreateMode = ko.observable(false);
         
         self.CreatedAtFormatted = ko.computed(function(){
             if(self.CreatedAt())
@@ -193,18 +182,42 @@ var viewModels = viewModels || {};
             self.City(undefined);
             self.Area(undefined);
             self.Rating(1);
-            self.IsRecommended(true);
-            self.IsCurrent(true);
+            self.IsRecommended('true');
+            self.IsCurrent('true');
             self.AvgDownloadSpeed(1);
             self.AvgUploadSpeed(1);
             self.Email(undefined);
             self.Description(undefined);
+            self.IsInCreateMode(true);
+        };
+
+        self.RatingUp = function(){
+            var createRating = parseInt(self.Rating());
+            if(createRating < 5){
+                $("#rating").fadeToggle(10);                
+                self.Rating(createRating + 1);
+                $("#rating").fadeToggle(400);                
+            }else{
+                self.Rating(createRating);
+            }
+        };
+
+        self.RatingDown = function(){
+            var createRating = parseInt(self.Rating());
+            if(createRating > 1){
+                $("#rating").fadeToggle(10);
+                self.Rating(createRating - 1);
+                $("#rating").fadeToggle(400);
+            }else{
+                self.Rating(createRating);
+            }
         };
 
         self.SaveReview = function(){
             if(!self.IsValid()){
                 return;
             }
+            self.IsInCreateMode(false);
             var data = ko.toJSON(self);
             $.ajax({
                 type: 'POST',
@@ -240,6 +253,7 @@ var AppModule = AppModule || {};
         _vmMain = new viewModels.MainViewModel();
         _vmUser = new viewModels.UserViewMOdel();
         _vmReview = new viewModels.ReviewViewModel();
+        _vmReview.IsInCreateMode(true);
         this.getMainData();
     }
 

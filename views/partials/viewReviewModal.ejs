@@ -41,13 +41,13 @@
                     <div class="col-sm-6">
                         <label>I recommend this service:</label><br />
                         <div class="well well-sm">
-                            <span data-bind="text: IsRecommended() ? 'Yes':'No'"></span>
+                            <span data-bind="text: IsRecommended() == 'true' ? 'Yes':'No'"></span>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label>This is my current service provider:</label><br />
                         <div class="well well-sm">
-                            <span data-bind="text: IsCurrent()? 'Yes':'No'"></span>
+                            <span data-bind="text: IsCurrent() == 'true'? 'Yes':'No'"></span>
                         </div>
                     </div>
                 </div>
