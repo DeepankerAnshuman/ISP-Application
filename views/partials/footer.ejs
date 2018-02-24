@@ -3,38 +3,11 @@
     <script src="/js/bootstrap.min.js"></script> 
     <script src="/js/knockout-latest.js"></script>
     <script src="/js/user-scripts.js"></script>
-    <script src="/js/rating.js"></script>
     
     <script type="text/javascript">
         $(function(){
-            var rating = new Rating({
-                field: $('.rating-container'),
-                defaultRating: 3,
-                onSelect: function(rating) {
-                    alert(rating);
-                }
-            });            
-            AppModule.Init();            
-        });
-
-        // $('.rating-up').click(function(){
-        //     rating = parseInt($('#rating').text());
-        //     if(rating < 5){
-        //         $('#rating').text(rating + 1);
-        //     }else{
-        //         $('#rating').text(rating);            
-        //     }
-        // });
-
-        // $('.rating-down').click(function(){
-        //     rating = parseInt($('#rating').text());
-        //     if(rating > 1){
-        //         $('#rating').text(rating -1);
-                
-        //     }else{
-        //         $('#rating').text(rating);
-        //     }
-        // });
+            AppModule.Init($('#hidden-city').text());            
+        });        
     </script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<style type="text/css">
+#get-me-reviews {
+    font-size: 1em;
+}
+
+#get-me-reviews:hover {
+    font-weight: bold;
+}
+
+.myDiv {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    height: 92%;
+    margin-top: 50px;
+}
+
+.myDiv .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url("/images/image1.jpg") center center;
+    opacity: .1;
+    width: 100%;
+    height: 100%;
+}      
+.main-container{
+
+} 
+</style>
+<%- include partials/header.ejs %>
+<div class="myDiv">
+    <div class="bg"></div>
+    <marquee style="text-align: center; font-size: 1.5em; color: green;"><b>We are new, so we heighly encourage you to write reviews to help others!!</b></marquee>
+    <div style="margin-top: 100px;">
+        <div class="row" style="text-align: center; font-size: 1.5em; color: green;">
+            <p  style="margin-left:-3.5em;">Select your location to find the ideal Internet Service Provider in your city!!</p>
+        </div> 
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-6">
+                <select id="city-ddl" class="btn-primary btn-lg" style="width: 100%; font-size: 1em; background: white !important; color: black;">
+                    <option>Bangalore</option>
+                    <option>Delhi</option>
+                    <option>Chennai</option>
+                    <option>Kolkata</option>
+                    <option>Pune</option>
+                    <option>Hyderabad</option>
+                </select>
+            </div>
+            <div class="col-lg-2">
+                <a id="a-to-index" href="/index"><button id="get-me-reviews" class="btn btn-primary btn-lg">Get Me Reviews</button></a>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        
+        <!-- <div class="row" style="text-align: center; font-size: 1.5em; color: green;">
+            <p  style="margin-left:-3.5em;">Select your location to find the ideal Internet Service Provider in your city!!</p>
+        </div>         -->
+    </div>
+</div>
+<%- include partials/footer %>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#get-me-reviews').click(function(){
+            var href = '/index?city='+$('#city-ddl').val();
+            $("#a-to-index").attr("href", href);
+        })
+    });
+</script>

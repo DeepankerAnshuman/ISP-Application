@@ -4,16 +4,14 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Write a Review</h4>
+          <button type="button" class="close" data-dismiss="modal" data-bind="click: ResetReview">&times;</button>
+          <h4 class="modal-title">Write a Review <select class="btn btn-success" style="margin-left:2em;" data-bind="options: AvailableCities, value: City"></select></h4>
+          
         </div>
         <div class="modal-body">
-          <form>
-            <div class="form-group" data-bind="visible: !IsValid()">
-                <span class="error-message">Note: Please fill all mendatory fields before submitting your review.</span>
-            </div>
+          <form>            
             <div id="validation-error" style="visibility: hidden">
-              <span class="error-message" id="validation-error-span"></span>
+              <span class="bg-danger" id="validation-error-span"></span>
             </div>
             <div class="row">
                 <div class="col-sm-6">
@@ -30,8 +28,8 @@
             <br/>
             <div class="row">
               <div class="col-sm-6">
-                  <label for="r-city">City:</label>
-                  <input type="text" class="form-control" id="r-city" data-bind="value : City" placeholder="Enter name of your city">
+                  <label for="r-mail">Email:</label>
+                  <input type="email" class="form-control" id="r-mail" data-bind="value : Email" placeholder="Your e-mail address">
               </div>
               <div class="col-sm-6">
                   <label for="r-area">Area:</label>
@@ -72,20 +70,25 @@
             </div>
             <br/>
             <div class="row">
-                <div class="col-sm-8">
-                  <label for="r-mail">Email:</label>
-                  <input type="email" class="form-control" id="r-mail" data-bind="value : Email" placeholder="Your e-mail address">
-                </div>
-            </div>
-            <br/>
-            <div class="row">
                 <div class="col-sm-12">
                   <label>Review Description:</label>
                   <textarea rows="3" class="form-control" data-bind="value : Description" placeholder="Write your review"></textarea>
                 </div>
             </div>
             <br/>
-            <button class="btn btn-primary" data-bind="click : SaveReview, enable: IsValid()">Submit</button>
+            <div class="row" data-bind="visible: !IsValid()">
+              <div class="col-sm-12">
+                <span class="bg-danger" data-bind="visible: ErrorMessage() == 'fillAll'">Please fill all mendatory fields before submitting your review.</span>
+                <span class="bg-danger" data-bind="visible: ErrorMessage() == 'selectCity'">Please select a city to complete the review.</span>
+              </div>
+            </div>
+            <br/>
+            <div class="row">
+              <div class="col-sm-4">
+                <button class="btn btn-primary" data-bind="click : SaveReview, enable: IsValid()">Submit</button>
+              </div>
+              <div class="col-sm-8"></div>
+            </div>
           </form>
         </div>
       </div>

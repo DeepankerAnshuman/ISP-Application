@@ -4,11 +4,16 @@ var reviewController = require('../controllers/review_controller.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'MyISP' });
+  res.render('main', { title: 'MyISP' });
+});
+
+/*Get Index Page*/
+router.get('/index', function(req, res, next) {  
+  res.render('index', { title: 'MyISP', city: req.query.city});
 });
 
 router.get('/getReviews', function(req, res, next){
-  reviewController.getReviews(function(result, err){
+  reviewController.getReviews(req.query, function(result, err){
     if(err) console.log(err);
     else{
       res.writeHead(200, {'content-type': 'text/json' });

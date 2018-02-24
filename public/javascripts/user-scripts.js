@@ -1,23 +1,59 @@
 var viewModels = viewModels || {};
 
-var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
+var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune','Chennai'];
+var sortOptions = ['Rating(High to low)', 'Rating(Low to high)'];
 
 (function(models){
     models.MainViewModel = function(){
         var self = this;
+        self.AreaToSearch = ko.observable(undefined);
+        self.ReviewSearchString = ko.observable(undefined);
 
+        self.SortOptions = ko.observableArray(sortOptions);
+        self.SortBy = ko.observable();
+        
         self.AvailableCities = ko.observableArray(cities);
         self.SelectedCity = ko.observable();
+        self.SelectedCity.subscribe(function(){
+            if(self.SelectedCity() || self.AreaToSearch())
+                AppModule.getMainData();
+        });
+        self.SelectedCity.valueHasMutated();
 
         self.Reviews = ko.observableArray([]);
         self.ReviewToView = ko.observable();
         
-        self.TopfiveReviews = ko.computed(function(){
-            var sortedReviews = self.Reviews().sort(function(left,right){
-                return right.CreatedAt() - left.CreatedAt();
-            })
-            return sortedReviews.slice(0,5);
-        });
+        self.TopfiveReviews = ko.observableArray([]);
+
+        self.SearchResults = ko.computed(function(){
+            if(!self.ReviewSearchString() || self.ReviewSearchString() == ''){
+                var sortedReviews = self.Reviews().sort(function(left,right){
+                    return right.CreatedAt() - left.CreatedAt();
+                })
+                self.TopfiveReviews(sortedReviews.slice(0,50));
+            }else{
+                var result = ko.utils.arrayFilter(self.Reviews(), function (rec) {  
+                    return (  
+                              (self.ReviewSearchString().length == 0 || rec.ServiceProvider().toLowerCase().indexOf(self.ReviewSearchString().toLowerCase()) > -1)  
+                           )          
+                });
+                self.TopfiveReviews(result); 
+            }            
+        }, self);
+
+        self.Sorter = ko.computed(function(){
+            var result;
+            if(self.SortBy() === sortOptions[1]){
+                result = self.TopfiveReviews().sort(function(left, right){
+                    return left.Rating() - right.Rating();
+                });
+            }else{
+                result = self.TopfiveReviews().sort(function(left, right){
+                    return right.Rating() - left.Rating();
+                });
+            }
+            self.TopfiveReviews(result); 
+        }, self);
 
         self.TopFiveIsp = ko.computed(function(){
             var distinctISP = [];
@@ -32,7 +68,7 @@ var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
                     
                     if(isPresent)
                     {
-                        distinctISP.find((o, i) => {
+                        distinctISP.find(function(o,i){
                             if (o.isp === item.ServiceProvider()) {
                                 o.ratings.push(item.Rating());
                                 distinctISP[i] = { isp: item.ServiceProvider(), ratings: o.ratings };
@@ -73,6 +109,10 @@ var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
         self.ViewReview = function(vm){
             self.ReviewToView(vm);
         };
+
+        self.GetMainData = function(){
+
+        }
     }
 
     models.UserViewMOdel = function(){
@@ -149,6 +189,7 @@ var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
         self.Id = ko.observable(data ? data._id : undefined);
         self.Author = ko.observable(data ? data.Author : undefined);
         self.ServiceProvider = ko.observable(data ? data.ServiceProvider : undefined);
+        self.AvailableCities = ko.observableArray(cities);
         self.City = ko.observable(data ? data.City : undefined);
         self.Area = ko.observable(data ? data.Area : undefined);
         self.Rating = ko.observable(data ? data.Rating: 1);
@@ -160,6 +201,7 @@ var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
         self.Description = ko.observable(data ? data.Description : undefined);
         self.CreatedAt = ko.observable(data ? new Date(data.CreatedAt) : undefined);
         self.IsInCreateMode = ko.observable(false);
+        self.ErrorMessage = ko.observable(undefined);
         
         self.CreatedAtFormatted = ko.computed(function(){
             if(self.CreatedAt())
@@ -168,9 +210,15 @@ var cities = ['Bangalore','Delhi','Hyderabad','Kolkata','Mumbai','Pune'];
                 return undefined;    
         });
         
+        
         self.IsValid = ko.computed(function(){
             if(!self.ServiceProvider() || !self.City() || !self.Email() || !self.Area() || !self.Rating() || !self.AvgUploadSpeed()
              || !self.AvgDownloadSpeed() || !self.Description()){
+                self.ErrorMessage('fillAll'); 
+                return false;
+            }
+            if(self.City() == 'Select one'){
+                self.ErrorMessage('selectCity');
                 return false;
             }
             else
@@ -249,29 +297,14 @@ var AppModule = AppModule || {};
     var _vmUser = {};
     var _vmReview = {};
 
-    module.Init = function(){
+    module.Init = function(cityToPreselect){
         _vmMain = new viewModels.MainViewModel();
+        _vmMain.SelectedCity(cityToPreselect);
         _vmUser = new viewModels.UserViewMOdel();
         _vmReview = new viewModels.ReviewViewModel();
         _vmReview.IsInCreateMode(true);
         this.getMainData();
-    }
-
-    module.getMainData = function(){
-        $.ajax({
-            type: 'GET',
-            url: 'index/getReviews',
-            dataType: 'json',                
-            success: function(reviews){
-                // ini
-                AppModule.BindData(reviews);
-                AppModule.InitializeKnockout();
-            },
-            error: function(jqXHR, textStatus, err) {
-                console.log(err);                    
-            }
-        });
-    };
+    }    
 
     module.Vm = function(){
         return _vmUser;
@@ -285,9 +318,48 @@ var AppModule = AppModule || {};
         return _vmMain;
     }
 
-    module.BindData = function(reviews){
-        var jsonReviews = reviews;
+    module.getMainData = function(){
+        var city;
+        var area;
 
+        if(!AppModule.VmMain().SelectedCity() && !AppModule.VmMain().AreaToSearch()){
+            AppModule.BindData();
+            AppModule.InitializeKnockout();
+            return;
+        }
+        
+        if(AppModule.VmMain().SelectedCity()){
+            city = AppModule.VmMain().SelectedCity() === 'Select City' ? 'all' : AppModule.VmMain().SelectedCity();
+        }else{
+            city = 'all';
+        }
+
+        area = AppModule.VmMain().AreaToSearch() && AppModule.VmMain().AreaToSearch() != '' ? AppModule.VmMain().AreaToSearch() : 'all';
+        $.ajax({
+            type: 'GET',
+            url: 'index/getReviews',
+            data: {
+                'city': city,
+                'area': area
+            },
+            dataType: 'json',                
+            success: function(reviews){
+                // ini
+                AppModule.BindData(reviews);
+                AppModule.InitializeKnockout();
+            },
+            error: function(jqXHR, textStatus, err) {
+                console.log(err);                    
+            }
+        });
+    };
+
+    module.BindData = function(reviews){
+        if(!reviews){
+            return;
+        }
+
+        var jsonReviews = reviews;
         var mappedReviews = ko.utils.arrayMap(jsonReviews, function(item) {
             return new viewModels.ReviewViewModel(item);
         });

@@ -27,12 +27,34 @@ exports.createReview = function(data, callback){
     //review.author = data.Author;
 }
 
-exports.getReviews = function(callback){
-    db.Review.find({}, function(err, reviews){
-        if(err){
-          console.log(err);
-        } else{
-            callback(reviews);
-        }
-    })
+exports.getReviews = function(query, callback){
+    if(query.city == 'all' && query.area == 'all'){
+        db.Review.find({}, function(err, reviews){
+            if(err){
+              console.log(err);
+            } else{
+                callback(reviews);
+            }
+        });
+    }
+    if(query.city != 'all' && query.area == 'all'){
+        db.Review.find({"City": query.city}, function(err, reviews){
+            if(err){
+              console.log(err);
+            } else{
+                callback(reviews);
+            }
+        });
+    }
+    if(query.city != 'all' && query.area != 'all'){
+        //this code needs update when area mapping will come in place
+        db.Review.find({}, function(err, reviews){
+            if(err){
+              console.log(err);
+            } else{
+                callback(reviews);
+            }
+        });
+    }
+    
 }

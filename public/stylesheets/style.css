@@ -46,6 +46,10 @@ input[type="text"], input[type="password"], input[type="number"], input[type="em
   box-shadow: 0px;
 }
 
+button, input[type="button"], input[type="submit"]{
+  outline: none !important;
+}
+
 /* #searchDiv{
   background-image: url("/images/image1.jpg"); */
   /* background: -moz-linear-gradient(270deg, rgba(107,107,107,1) 0%, rgba(107,107,107,1) 5%, rgba(0,0,0,1) 70%); ff3.6+ */
@@ -279,4 +283,44 @@ input[type="radio"]{
 .radio-selected{
   background: #337ab7 !important;
   color: white !important ;
+}
+
+/*search filters*/
+/* .filter-div{  
+  border: thin solid #337ab7;
+  margin-left: .8em;
+  margin-right: .8em;
+  border: thin solid #337ab7;
+} */
+
+/* .left-inner-div{
+  padding: 1em;
+  height: 100%;
+  color: brown;
+  text-align: left;
+}
+
+.right-inner-div{
+  height: 100%;
+  padding: 1em;
+  color: brown;
+  text-align: right !important;
+  border-left: thin solid #337ab7;
+} */
+
+/* .top-left-corner{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: .2em;
+  margin-bottom: 2em;
+  text-align: left !important;
+} */
+
+#no-style-text{
+  background: transparent;
+  outline:none;
+  box-shadow:none;
+  border-radius: 0;
 }

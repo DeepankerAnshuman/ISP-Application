@@ -1,16 +1,26 @@
-<div class="z-index-navbar">
-    <%- include partials/header.ejs %>
-</div>
+<%- include partials/header.ejs %>
 <main id="main" >
     <div class="search-conatainer z-index">
         <%- include partials/search.ejs %>    
     </div>
     <br/>
+      
         <div class="row">
             <div class="col-sm-8">
                 <div class="panel panel-primary backgroud-transparent">
-                    <div class="panel-heading">Recent Reviews</div>
+                    <div class="panel-heading">Recent Reviews for <span data-bind="text: SelectedCity"></span></div>
                     <div class="panel-body">
+                        <div id="filter-div" class="row">
+                            <div class="col-sm-6">
+                                <div>
+                                    <input id="no-style-text" data-bind="textInput: ReviewSearchString" class="form-control" type="text" placeholder="Search the service provider.." style="padding: 4px;"/>
+                                </div>    
+                            </div>
+                            <div class="col-sm-6" style="text-align: right;">
+                                <select id="review-sorter" class="btn btn-sm btn-primary" data-bind="options: SortOptions, value:SortBy"></select>
+                            </div>
+                        </div>
+                        <hr/>
                         <!-- ko foreach: TopfiveReviews -->
                         <div class="review-display-widget">
                             <div class="row">
@@ -20,7 +30,7 @@
                                 <div class="col-sm-9">
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <span data-bind="text: ServiceProvider" style="font-size:1.4em; color:brown; font-weight:bold;"></span>
+                                            <span data-bind="text: ServiceProvider" style="font-size:1.1em; color:brown; font-weight:bold;"></span>
                                         </div>
                                         <div class="col-sm-6">
                                             <div>
@@ -30,13 +40,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <span data-bind="text: Description"></span>
+                                            <span data-bind="text: Description" style="width: 100%;"></span>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="col-sm-2">
-                                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview" style="margin-top: 2px; align: right;">Read Full</button>
+                                    <button class="btn btn-link" data-toggle="modal" data-target="#viewReviewModal" data-bind="click: $parent.ViewReview" style="margin-top: 2px; align: right;">Read Full</button>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +56,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="panel panel-primary backgroud-transparent">
-                    <div class="panel-heading">Top rated ISPs</div>
+                    <div class="panel-heading">Top rated ISPs in <span data-bind="text: SelectedCity"></span></div>
                     <div class="panel-body">
                         <!-- ko foreach: TopFiveIsp -->
                         <div class="review-display-widget">
@@ -55,7 +65,7 @@
                                     <img src="https://i.imgur.com/ySSnbpt.png" class="img-rounded" alt="Cinque Terre" >
                                 </div>
                                 <div class="col-sm-9">
-                                    <strong><span data-bind="text: isp" style="font-size: 1.1em;"></span></strong>
+                                    <strong><span data-bind="text: isp" style="font-size:1.1em; color:brown; font-weight:bold;"></span></strong>
                                 </div>
                                 <div class="col-sm-9" style="text-align: left">
                                     <div>
@@ -78,4 +88,5 @@
             <%- include partials/viewReviewModal.ejs %>
         </div>
     </main>
+    <label id="hidden-city" style="display: none"><%=city%></label>
 <%- include partials/footer.ejs %>
